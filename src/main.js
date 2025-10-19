@@ -13,3 +13,11 @@ import {
     hideLoader,
 } from './js/render-functions.js';
 
+const searchInput = document.querySelector("#searchInput")
+const searchBtn = document.querySelector("#searchBtn")
+const gallery = document.querySelector("#gallery")
+
+searchBtn.addEventListener('click', (e) => {
+    e.preventDefault()
+    getImagesByQuery(searchInput.value)
+})
