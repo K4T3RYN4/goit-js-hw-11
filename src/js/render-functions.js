@@ -1,23 +1,20 @@
 
-import SimpleLightbox from "simplelightbox";
-import "simplelightbox/dist/simple-lightbox.min.css";
-
-// functions
+const loader = document.querySelector('#loader')
 
 function createGallery(images) {
-    gallery.insertAdjacentHTML('afterbegin', images)
+    gallery.insertAdjacentHTML('afterbegin', images);
 }
 
 function clearGallery() {
-    gallery.innerHTML = ''
+    gallery.innerHTML = '';
 }
 
 function showLoader() {
-
+    loader.classList.remove('hidden')
 }
 
 function hideLoader() {
-
+    loader.classList.add('hidden')
 }
 
 export { createGallery, clearGallery, showLoader, hideLoader };

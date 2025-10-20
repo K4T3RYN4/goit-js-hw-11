@@ -2,7 +2,6 @@ import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
-import axios from "axios";
 
 import { getImagesByQuery } from './js/pixabay-api.js';
 
@@ -15,7 +14,6 @@ import {
 
 const searchInput = document.querySelector("#searchInput")
 const searchBtn = document.querySelector("#searchBtn")
-const gallery = document.querySelector("#gallery")
 
 
 let sl = new SimpleLightbox('.gallery a', {
@@ -27,8 +25,11 @@ let sl = new SimpleLightbox('.gallery a', {
     navText: ['<', '>'],
     captions: true,
     captionsData: 'alt',
-    captionDelay: 250,
+    captionSelector: 'img',
+    captionDelay: 150,
     showCounter: true,
+    scrollZoom: true,
+    close: true,
 });
 
 searchBtn.addEventListener('click', (e) => {
@@ -43,6 +44,8 @@ searchBtn.addEventListener('click', (e) => {
 
     clearGallery()
 
+    showLoader()
+
     getImagesByQuery(searchInput.value)
         .then(hits => {
             if (!hits || hits.length === 0) {
@@ -56,7 +59,8 @@ searchBtn.addEventListener('click', (e) => {
         })
         .catch(err => {
             console.log(err.message);
-        });
+        })
+        .finally(hideLoader);
 })
 
 // create pic template
@@ -74,11 +78,10 @@ function cardsMarkup(arr) {
             />
         </a>
         <ul>
-            <p>Tags: ${tags}</p>
-            <p>Likes: ${likes}</p>
-            <p>Views: ${views}</p>
-            <p>Comments: ${comments}</p>
-            <p>Downloads: ${downloads}</p>
+            <li>Likes: ${likes}</li>
+            <li>Views: ${views}</li>
+            <li>Comments: ${comments}</li>
+            <li>Downloads: ${downloads}</li>
         </ul>
     </li>`).join('\n')
 }
