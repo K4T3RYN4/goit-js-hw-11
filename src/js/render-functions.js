@@ -32,11 +32,11 @@ function clearGallery() {
 }
 
 function showLoader() {
-    loader.classList.remove('hidden')
+    loader.classList.remove('visually-hidden')
 }
 
 function hideLoader() {
-    loader.classList.add('hidden')
+    loader.classList.add('visually-hidden')
 }
 
 export { createGallery, clearGallery, showLoader, hideLoader };
@@ -44,8 +44,8 @@ export { createGallery, clearGallery, showLoader, hideLoader };
 
 function createCardsMarkup(arr) {
     return arr.map(({ largeImageURL, webformatURL, tags, likes, views, comments, downloads }) => `
-    <li class="gallery-item">
-        <a class="gallery-link" href="${largeImageURL}">
+    <li class="gall-item">
+        <a class="gall-pic" href="${largeImageURL}">
             <img
                 width="360"
                 height="200"
@@ -54,11 +54,11 @@ function createCardsMarkup(arr) {
                 alt="${tags}"
             />
         </a>
-        <ul>
-            <li>Likes: ${likes}</li>
-            <li>Views: ${views}</li>
-            <li>Comments: ${comments}</li>
-            <li>Downloads: ${downloads}</li>
+        <ul class="gall-descr">
+            <li class="gall-descr-item">Likes: ${likes}</li>
+            <li class="gall-descr-item">Views: ${views}</li>
+            <li class="gall-descr-item">Comments: ${comments}</li>
+            <li class="gall-descr-item">Downloads: ${downloads}</li>
         </ul>
     </li>`).join('\n')
 }

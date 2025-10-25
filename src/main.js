@@ -40,5 +40,7 @@ searchBtn.addEventListener('click', (e) => {
         .catch(err => {
             console.log(err.message);
         })
-        .finally(() => hideLoader());
+        .finally(() => {
+            hideLoader()
+        })
 })
